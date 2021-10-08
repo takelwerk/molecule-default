@@ -4,17 +4,14 @@ driver:
 lint: |
   set -e
   yamllint .
-  ansible-lint
+  ansible-lint .
   flake8
 platforms:
-  # yamllint disable-line rule:line-length
-  - name: molecule-default-${HOSTNAME:-name}-${TAKELAGE_PROJECT_ENV:-prod}
-    # yamllint disable-line rule:line-length
+  - name: molecule_default_${HOSTNAME:-name}
     image: ${TAKELAGE_PROJECT_BASE_IMG:-nobaseimage}
     command: ${TAKELAGE_PROJECT_COMMAND:-/usr/bin/tail -f /dev/null}
     pre_build_image: true
     groups:
-      - ${TAKELAGE_PROJECT_ENV:-prod}
       - users
       - molecule
 provisioner:
@@ -33,8 +30,7 @@ provisioner:
 verifier:
   name: testinfra
   options:
-    # p: cacheprovider  # enable cache
-    s: true  # capture output
+    s: true
     v: true
   additional_files_or_dirs: ${TAKELAGE_MOLECULE_VERIFIER_FILES:-[]}
 scenario:
