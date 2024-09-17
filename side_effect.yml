@@ -1,0 +1,8 @@
+---
+- name: (molecule) converge
+  hosts: all
+  tasks:
+    - name: (molecule) Start dockerd
+      shell: /usr/bin/dockerd --host unix:///var/run/docker.sock &
+      args:
+        creates: /var/run/docker.sock
