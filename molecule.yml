@@ -10,6 +10,10 @@ platforms:
     groups:
       - users
       - molecule
+    published_ports:
+      - 127.0.0.1:3080:80/tcp
+      - 127.0.0.1:3000:3000/tcp
+      - 127.0.0.1:3022:22/tcp
 provisioner:
   name: ansible
   playbooks:
